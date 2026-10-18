@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DNS History and Security</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- Website title and introduction -->
+    <header>
+        <h1>DNS History and Security</h1>
+        <p class="subtitle">The Domain Name System</p>
+    </header>
+    <!-- Main navigation -->
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="how-dns-works.html">How DNS Works</a>
+        <a href="history-security.html">History and Security</a>
+        <a href="key-concepts.html">Key Concepts</a>
+        <a href="references.html">References</a>
+        <a href="about.html">About</a>
+    </nav>
+    <main id="main-content">
+    <section>
+            <h2>The History of DNS</h2>
+            <p>
+                Before DNS, computers on the early internet relied
+                on the shared file called HOSTS.TXT to match computer
+                names with IP addresses. Eventually the network grew, and
+                maintaining and distributing this file became difficult.
+            </p>
+            <p>
+                In 1983, Paul Mockapetris introduced the "Domain Name
+                System". DNS organizes names into a hierarchy and
+                distributes responsibility across servers;
+                allowing for the naming system to grow with the internet.
+            </p>
+            <p>
+                In 1987, RFC 1034 and RFC 1035 documented the core
+                DNS concepts and implementation. These documents
+                remain the foundation of how DNS operates.
+            </p>
+        </section>
+    <!-- Common threats to DNS -->
+        <section>
+            <h2>DNS Security Threats</h2>
+            <ul>
+                <li>
+                    <strong>Cache poisoning:</strong> False DNS
+                    information is stored in a resolver's cache,
+                    potentially directing users to a malicious website.
+                </li>
+                <li>
+                    <strong>DNS hijacking:</strong> Attackers change
+                    DNS settings or records to redirect users
+                    without permission.
+                </li>
+                <li>
+                    <strong>Denial-of-service attacks:</strong>
+                    Attackers overwhelm DNS infrastructure with
+                    traffic, overwhelming services and making them 
+                    difficult to reach.
+                </li>
+            </ul>
+        </section>
+
+    <!-- Methods used to protect DNS -->
+        <section>
+            <h2>Protecting DNS</h2>
+            <p>
+                DNS Security Extensions (DNSSEC) use digital
+                signatures to help validating resolvers verify
+                the origin and integrity of DNS data.
+            </p>
+            <p>
+                DNS over HTTPS (DoH) and DNS over TLS (DoT)
+                encrypt queries between a client and a supporting
+                resolver. This helps protect those queries from
+                being read or modified while it travels between them.
+            </p>
+            <p>
+                Strong passwords, multifactor authentication,
+                software updates, and monitoring help
+                protect DNS management accounts and servers.
+            </p>
+        </section>
+    </main>
+        <!-- Class project info -->
+    <footer>
+        <p>
+            This website is a class project for
+            <a href="https://ksuweb.github.io/IT3203/">IT 3203: Web and Internet</a>
+            at Kennesaw State University.
+        </p>
+    </footer>
+</body>
+</html>

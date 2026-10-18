@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How DNS Works</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- Website title and introduction -->
+    <header>
+        <h1>How DNS Works</h1>
+        <p class="subtitle">The Domain Name System</p>
+    </header>
+    <!-- Main navigation -->
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="how-dns-works.html">How DNS Works</a>
+        <a href="history-security.html">History and Security</a>
+        <a href="key-concepts.html">Key Concepts</a>
+        <a href="references.html">References</a>
+        <a href="about.html">About</a>
+    </nav>
+    <main id="main-content">
+     <section>
+    <h2>From a Domain Name to an IP Address</h2>
+    <p>
+        When a user enters a domain name into a web browser, 
+        the browser sends a request to a DNS resolver. 
+        The resolver then queries various DNS servers to find the IP address.
+        Then, once the IP address is found, it is returned to the browser 
+        to then connect to the server hosting the website; a proccess called name resolution.
+    </p>
+    <p>
+        The process involves several steps, including checking the local cache, 
+        querying root servers, top-level domain (TLD) servers, and authoritative name servers. 
+        However, your browser or OS my have it stored in its cache already, so the entire 
+        process my not be needed. This hierarchical structure ensures that DNS queries are resolved efficiently.
+    </p>
+     </section>
+     <!-- DNS lookup when the resolver needs an uncached answer -->
+        <section>
+            <h2>The DNS Lookup Process</h2>
+            <p>
+                If the resolver does not have a cached answer, it may
+                follow these steps to find a website's IP address...
+            </p>
+            <ol>
+                <li>
+                    <strong>Root server:</strong> Directs the resolver
+                    to the appropriate top-level domain server.
+                </li>
+                <li>
+                    <strong>Top-level domain server:</strong> A server
+                    for an extension such as ".com" directs the resolver
+                    to the domain's authoritative name server.
+                </li>
+                <li>
+                    <strong>Authoritative name server:</strong> Provides
+                    the requested DNS record, such as an IP address.
+                </li>
+                <li>
+                    <strong>Answer returned:</strong> The resolver
+                    sends the answer to your device and caches it
+                    for a period determined by its time to live (TTL).
+                </li>
+            </ol>
+            <p>
+                Your browser can then use the IP address to connect
+                to the web server. Cached information can allow
+                future lookups to skip some of these steps.
+            </p>
+        
+                <!-- DNS resolution diagram with source credit -->
+        <figure>
+            <img src="DNS_Architecture.svg"
+                 alt="Diagram shows the proccess of how DNS queries are resolved."
+                 width="800">
+            <figcaption>
+                DNS Architecture by Aaron Filbert.
+                <a href="https://commons.wikimedia.org/wiki/File:DNS_Architecture.svg">Source</a>,
+                <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.
+            </figcaption>
+        </figure>
+    </section>
+    <!-- Root server facts and external website -->
+        <section>
+            <h2>DNS Root Servers</h2>
+            <p>
+                Root servers serve information from the root
+                zone at the top of the DNS hierarchy. They help
+                resolvers find the servers responsible for
+                top-level domains such as .com and .org.
+            </p>
+            <p>
+                The root server system has 13 named identities,
+                labeled A through M. These identities are
+                supported by many server instances around
+                the world.
+            </p>
+
+            <h3>The 13 Root Server Names</h3>
+            <ul>
+                <li>a.root-servers.net</li>
+                <li>b.root-servers.net</li>
+                <li>c.root-servers.net</li>
+                <li>d.root-servers.net</li>
+                <li>e.root-servers.net</li>
+                <li>f.root-servers.net</li>
+                <li>g.root-servers.net</li>
+                <li>h.root-servers.net</li>
+                <li>i.root-servers.net</li>
+                <li>j.root-servers.net</li>
+                <li>k.root-servers.net</li>
+                <li>l.root-servers.net</li>
+                <li>m.root-servers.net</li>
+            </ul>
+
+            <p>
+                Explore the operators and worldwide locations at
+                <a href="https://root-servers.org/">
+                    the Root Server Technical Operations Association
+                </a>.
+            </p>
+        </section>
+        <!-- Common DNS record types -->
+        <section>
+            <h2>Common DNS Records</h2>
+            <p>
+                DNS stores different types of records. Each type
+                provides specific information about a domain.
+            </p>
+
+            <table>
+                <caption>DNS Record Types and Purposes</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Record Type</th>
+                        <th scope="col">Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>A</td>
+                        <td>Maps a name to an IPv4 address.</td>
+                    </tr>
+                    <tr>
+                        <td>AAAA</td>
+                        <td>Maps a name to an IPv6 address.</td>
+                    </tr>
+                    <tr>
+                        <td>CNAME</td>
+                        <td>Points an alias name to another domain name.</td>
+                    </tr>
+                    <tr>
+                        <td>MX</td>
+                        <td>Identifies mail servers for a domain.</td>
+                    </tr>
+                    <tr>
+                        <td>NS</td>
+                        <td>Identifies authoritative name servers for a zone.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <!-- screenshots of Command Prompt lookups -->
+        <section>
+            <h2>DNS in Action: YouTube</h2>
+            <p>
+                I used Windows Command Prompt to look up DNS
+                information for:
+                <a href="https://www.youtube.com/">YouTube</a>.
+                The results show IP addresses associated with
+                youtube.com and its authoritative name servers.
+            </p>
+
+            <h3>Finding YouTube's IP Addresses</h3>
+            <p>
+                I entered the following command:
+            </p>
+            <pre><code>nslookup youtube.com</code></pre>
+
+            <figure>
+                <img src="youtube-addresses.png"
+                     alt="Command Prompt lookup of youtube.com showing four IPv6 and four IPv4 addresses."
+                     width="700">
+                <figcaption>
+                    My YouTube address lookup.
+                    Returned addresses may change over time.
+                </figcaption>
+            </figure>
+
+            <p>
+                The Server and Address fields at the top identify
+                the DNS resolver that answered the request.
+                The server name appears as "UnKnown because
+                nslookup could not determine its hostname.
+                However, he lookup still succeeded.
+            </p>
+            <p>
+                Below the domain name, the response lists four
+                IPv6 addresses and four IPv4 addresses.
+                A domain can have multiple addresses.
+            </p>
+            <p>
+                The label Non-authoritative answer means the
+                response was supplied by a resolver rather than
+                directly by the domain's authoritative name server.
+            </p>
+
+            <h3>YouTube's Authoritative Name Servers</h3>
+            <p>
+                I then requested NS records using this command:
+            </p>
+            <pre><code>nslookup -type=NS youtube.com</code></pre>
+
+            <figure>
+                <img src="youtube-nameservers.png"
+                     alt="Command Prompt listing ns1.google.com through ns4.google.com as YouTube's name servers."
+                     width="700">
+                <figcaption>
+                    My YouTube name server lookup on October 18, 2026.
+                </figcaption>
+            </figure>
+
+            <p>
+                The response lists four authoritative name servers:
+                ns1.google.com, ns2.google.com, ns3.google.com,
+                and ns4.google.com. It also displays IPv4
+                and IPv6 addresses for these servers.
+            </p>
+            <p>
+                These name servers provide DNS information for
+                youtube.com. These addresses are separate from
+                the website addresses returned by the first lookup.
+            </p>
+        </section>
+
+        <!-- Embedded video with an alternative viewing link -->
+        <section>
+            <h2>DNS Video Explanation</h2>
+            <p>
+                This animated video provides another explanation
+                of DNS and the name resolution process.
+            </p>
+
+        <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/mpQZVYPuDGU"
+            title="DNS animated explanation"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen>
+        </iframe>
+
+            <p>
+                <a href="https://www.youtube.com/watch?v=mpQZVYPuDGU">
+                    Watch the DNS explanation on YouTube
+                </a>.
+            </p>
+        </section>
+    </main>
+        <!-- Class project info -->
+    <footer>
+        <p>
+            This website is a class project for
+            <a href="https://ksuweb.github.io/IT3203/">IT 3203: Web and Internet</a>
+            at Kennesaw State University.
+        </p>
+    </footer>
+</body>
+</html>

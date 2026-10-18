@@ -1,0 +1,185 @@
+/* General page appearance */
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #243247;
+    background-color: #f1f5f9;
+}
+
+/* Website heading */
+header {
+    padding: 36px 20px;
+    text-align: center;
+    color: white;
+    background-color: #16324f;
+}
+
+h1 {
+    margin: 0;
+    font-size: 2.2rem;
+}
+
+h2,
+h3 {
+    color: #16324f;
+}
+
+/* Class selector for the subtitle */
+.subtitle {
+    margin: 8px 0 0;
+    color: #d5e8f5;
+}
+
+/* Flexbox navigation layout */
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px;
+    background-color: #22496b;
+}
+
+nav a {
+    padding: 8px 14px;
+    border-radius: 5px;
+    color: white;
+    text-decoration: none;
+}
+
+nav a:hover,
+nav a:focus-visible {
+    color: #16324f;
+    background-color: #d5e8f5;
+}
+
+/* ID selector for the main content area */
+#main-content {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+/* Content sections */
+section {
+    margin-bottom: 24px;
+    padding: 24px;
+    border: 1px solid #d5dee8;
+    border-radius: 8px;
+    background-color: white;
+}
+
+section h2 {
+    margin-top: 0;
+}
+
+a {
+    color: #075985;
+}
+
+a:hover,
+a:focus-visible {
+    color: #8a3415;
+}
+
+li {
+    margin-bottom: 8px;
+}
+
+/* Key concept definitions */
+dt {
+    margin-top: 18px;
+    font-weight: bold;
+    color: #16324f;
+}
+
+dd {
+    margin: 5px 0 15px;
+}
+
+/* Images and captions */
+figure {
+    margin: 24px 0;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
+
+figcaption {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #475569;
+}
+
+/* DNS records table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+caption {
+    margin-bottom: 12px;
+    font-weight: bold;
+}
+
+th,
+td {
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    text-align: left;
+}
+
+th {
+    color: white;
+    background-color: #22496b;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #eef5fa;
+}
+
+/* Command examples */
+pre {
+    overflow-x: auto;
+    padding: 15px;
+    border-radius: 5px;
+    color: white;
+    background-color: #16324f;
+}
+
+code {
+    overflow-wrap: anywhere;
+}
+
+/* Responsive video player */
+iframe {
+    display: block;
+    width: 100%;
+    max-width: 700px;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    border: 0;
+}
+
+/* Class project footer */
+footer {
+    padding: 20px;
+    text-align: center;
+    color: white;
+    background-color: #16324f;
+}
+
+footer a {
+    color: #d5e8f5;
+}
+
+footer a:hover,
+footer a:focus-visible {
+    color: white;
+}

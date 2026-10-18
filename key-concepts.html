@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DNS Key Concepts</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- Website title and introduction -->
+    <header>
+        <h1>DNS Key Concepts</h1>
+        <p class="subtitle">The Domain Name System</p>
+    </header>
+    <!-- Main navigation -->
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="how-dns-works.html">How DNS Works</a>
+        <a href="history-security.html">History and Security</a>
+        <a href="key-concepts.html">Key Concepts</a>
+        <a href="references.html">References</a>
+        <a href="about.html">About</a>
+    </nav>
+    <main id="main-content">
+    <!-- Seven Key DNS concepts -->
+        <section>
+            <h2>Seven Key Concepts</h2>
+            <dl>
+                <dt>Domain Name</dt>
+                <dd>
+                    A readable name, such as example.com, within
+                    the DNS naming hierarchy.
+                </dd>
+
+                <dt>IP Address</dt>
+                <dd>
+                    A numerical address used to identify a network
+                    interface. DNS A and AAAA records associate
+                    names with IPv4 and IPv6 addresses.
+                </dd>
+
+                <dt>Recursive Resolver</dt>
+                <dd>
+                    A service that finds DNS answers for clients,
+                    using cached information or querying other servers.
+                </dd>
+
+                <dt>Root Name Server</dt>
+                <dd>
+                    A server at the top of the DNS hierarchy that
+                    directs resolvers to top-level domain servers.
+                </dd>
+
+                <dt>Top-Level Domain (TLD)</dt>
+                <dd>
+                    The final part of a domain name, such as .com,
+                    .org, or .edu.
+                </dd>
+
+                <dt>Authoritative Name Server</dt>
+                <dd>
+                    A server that holds and provides the official
+                    DNS records for a particular zone.
+                </dd>
+
+                <dt>Caching and Time to Live (TTL)</dt>
+                <dd>
+                    Caching temporarily stores DNS answers for reuse.
+                    TTL specifies how long a record may be cached
+                    before it needs to be refreshed.
+                </dd>
+            </dl>
+        </section>
+    </main>
+        <!-- Class project info -->
+    <footer>
+        <p>
+            This website is a class project for
+            <a href="https://ksuweb.github.io/IT3203/">IT 3203: Web and Internet</a>
+            at Kennesaw State University.
+        </p>
+    </footer>
+</body>
+</html>
