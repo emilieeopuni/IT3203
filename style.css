@@ -183,3 +183,55 @@ footer a:hover,
 footer a:focus-visible {
     color: white;
 }
+/* DNS quiz timer and form controls */
+#quiz-timer {
+    color: #16324f;
+    font-weight: bold;
+    font-variant-numeric: tabular-nums;
+}
+
+#dns-quiz fieldset,
+#dns-quiz > p {
+    min-width: 0;
+    margin: 0 0 16px;
+    padding: 16px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    background-color: white;
+}
+
+#dns-quiz legend,
+#dns-quiz > p label {
+    font-weight: bold;
+}
+
+#dns-quiz label {
+    display: block;
+    margin: 6px 0;
+}
+
+#dns-quiz input[type="text"] {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 360px;
+    padding: 8px 12px;
+    border: 1px solid #64748b;
+    border-radius: 4px;
+    font: inherit;
+}
+
+#dns-quiz button,
+#retake-quiz {
+    padding: 10px 18px;
+    border: 0;
+    border-radius: 6px;
+    background-color: #22496b;
+    color: white;
+    font: inherit;
+    cursor: pointer;
+}
+
+#dns-quiz button:disabled {
+    opacity: 0.6;
+    cursor: default;
+}
