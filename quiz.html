@@ -1,0 +1,236 @@
+<title>DNS Quiz</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DNS Quiz</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Understanding DNS</h1>
+        <p class="subtitle">The Domain Name System</p>
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="how-dns-works.html">How DNS Works</a>
+        <a href="history-security.html">History and Security</a>
+        <a href="key-concepts.html">Key Concepts</a>
+        <a href="quiz.html" aria-current="page">Quiz</a>
+        <a href="references.html">References</a>
+        <a href="about.html">About</a>
+    </nav>
+
+    <main id="main-content">
+        <h2>DNS Self-Assessment Quiz</h2>
+
+        <form id="dns-quiz">
+            <p>
+                <label for="q1">1. What does DNS stand for?</label>
+                <input type="text" id="q1" name="q1">
+            </p>
+
+            <fieldset>
+                <legend>2. Which DNS record maps a hostname to an IPv4 address?</legend>
+                <label><input type="radio" name="q2" value="a"> A</label>
+                <label><input type="radio" name="q2" value="aaaa"> AAAA</label>
+                <label><input type="radio" name="q2" value="mx"> MX</label>
+            </fieldset>
+
+            <fieldset>
+                <legend>3. Which DNS records map a hostname directly to an IP address? Select all that apply.</legend>
+                <label><input type="checkbox" name="q3" value="a"> A</label>
+                <label><input type="checkbox" name="q3" value="aaaa"> AAAA</label>
+                <label><input type="checkbox" name="q3" value="mx"> MX</label>
+            </fieldset>
+        </form>
+      <p>
+                <label for="q4">4. What command did I use to look up youtube.com in my DNS demonstration?</label>
+                <input type="text" id="q4" name="q4">
+            </p>
+
+            <fieldset>
+                <legend>5. What does DNS help your browser find when you enter a domain name?</legend>
+                <label><input type="radio" name="q5" value="password"> A website password</label>
+                <label><input type="radio" name="q5" value="ip"> An IP address</label>
+                <label><input type="radio" name="q5" value="file"> An HTML file</label>
+            </fieldset>
+
+            <fieldset>
+                <legend>6. Which server looks up DNS answers on behalf of a client?</legend>
+                <label><input type="radio" name="q6" value="root"> Root name server</label>
+                <label><input type="radio" name="q6" value="web"> Web server</label>
+                <label><input type="radio" name="q6" value="resolver"> Recursive resolver</label>
+            </fieldset>
+
+            <fieldset>
+                <legend>7. Where does a root name server direct a resolver looking up example.com?</legend>
+                <label><input type="radio" name="q7" value="tld"> The .com TLD name servers</label>
+                <label><input type="radio" name="q7" value="web"> The website's web server</label>
+                <label><input type="radio" name="q7" value="mail"> The domain's mail server</label>
+            </fieldset>
+
+            <fieldset>
+                <legend>8. Which server holds the DNS records for the domain it serves?</legend>
+                <label><input type="radio" name="q8" value="root"> Root name server</label>
+                <label><input type="radio" name="q8" value="authoritative"> Authoritative name server</label>
+                <label><input type="radio" name="q8" value="web"> Web server</label>
+            </fieldset>
+
+            <fieldset>
+                <legend>9. What does a DNS record's time to live (TTL) specify?</legend>
+                <label><input type="radio" name="q9" value="registration"> How long the domain is registered</label>
+                <label><input type="radio" name="q9" value="load"> How long the website takes to load</label>
+                <label><input type="radio" name="q9" value="cache"> How long the record can be cached</label>
+            </fieldset>
+
+            <fieldset>
+                <legend>10. Which servers can a recursive resolver consult when looking up example.com with an empty cache? Select all that apply.</legend>
+                <label><input type="checkbox" name="q10" value="root"> Root name server</label>
+                <label><input type="checkbox" name="q10" value="tld"> .com TLD name server</label>
+                <label><input type="checkbox" name="q10" value="web"> Web server</label>
+                <label><input type="checkbox" name="q10" value="authoritative"> Authoritative name server</label>
+            </fieldset>
+
+            <button type="submit">Submit Quiz</button>
+      </form>
+              <p>Time remaining: <span id="quiz-timer">10:00</span></p>
+
+        <section id="quiz-results" hidden>
+            <h2>Quiz Results</h2>
+            <p id="quiz-summary" role="status"></p>
+            <ol id="question-results"></ol>
+            <button type="button" id="retake-quiz">Retake Quiz</button>
+        </section>
+
+        <script>
+            const form = document.getElementById("dns-quiz");
+            const timer = document.getElementById("quiz-timer");
+            const results = document.getElementById("quiz-results");
+            const summary = document.getElementById("quiz-summary");
+            const questionResults = document.getElementById("question-results");
+            const retake = document.getElementById("retake-quiz");
+
+            const timeLimit = 10 * 60;
+            const passingScore = 7;
+
+            // Each entry matches the values in the form and gives a readable answer.
+            const answerKey = [
+                { values: ["domain name system"], answer: "Domain Name System" },
+                { values: ["a"], answer: "A" },
+                { values: ["a", "aaaa"], answer: "A and AAAA" },
+                { values: ["nslookup"], answer: "nslookup" },
+                { values: ["ip"], answer: "An IP address" },
+                { values: ["resolver"], answer: "Recursive resolver" },
+                { values: ["tld"], answer: "The .com TLD name servers" },
+                { values: ["authoritative"], answer: "Authoritative name server" },
+                { values: ["cache"], answer: "How long the record can be cached" },
+                {
+                    values: ["root", "tld", "authoritative"],
+                    answer: "Root, .com TLD, and authoritative name servers"
+                }
+            ];
+
+            let deadline;
+            let timerId;
+            let submitted;
+
+            function formatTime(seconds) {
+                const minutes = Math.floor(seconds / 60);
+                const remainder = String(seconds % 60).padStart(2, "0");
+                return `${minutes}:${remainder}`;
+            }
+
+            function finishQuiz() {
+                if (submitted) return;
+
+                submitted = true;
+                clearInterval(timerId);
+
+                const remaining = Math.max(0, Math.ceil((deadline - Date.now()) / 1000));
+                timer.textContent = formatTime(remaining);
+
+                // Read answers before disabling the form controls.
+                const responses = new FormData(form);
+                let score = 0;
+
+                answerKey.forEach((question, index) => {
+                    const answers = responses.getAll(`q${index + 1}`).map(value =>
+                        value.trim().toLowerCase().replace(/\s+/g, " ")
+                    );
+
+                    // Accept either the command name or the full example command.
+                    if (index === 3 && answers[0] === "nslookup youtube.com") {
+                        answers[0] = "nslookup";
+                    }
+
+                    // Checkbox questions require every correct choice and no extra choices.
+                    const correct = answers.length === question.values.length &&
+                        question.values.every(value => answers.includes(value));
+                    const points = correct ? 1 : 0;
+                    score += points;
+
+                    const item = document.createElement("li");
+                    item.textContent = `${correct ? "Correct" : "Incorrect"} (${points}/1). Answer: ${question.answer}`;
+                    item.style.color = correct ? "var(--quiz-correct, #16803c)" : "var(--quiz-incorrect, #c43232)";
+                    questionResults.appendChild(item);
+                });
+
+                for (const control of form.elements) {
+                    control.disabled = true;
+                }
+
+                const outcome = score >= passingScore ? "Pass" : "Fail";
+                const timeSpent = formatTime(timeLimit - remaining);
+                const timeUp = remaining === 0 ? "Time is up. " : "";
+                summary.textContent = `${timeUp}${outcome} | Score: ${score}/10 | Time spent: ${timeSpent}`;
+                results.hidden = false;
+            }
+
+            function updateTimer() {
+                const remaining = Math.max(0, Math.ceil((deadline - Date.now()) / 1000));
+                timer.textContent = formatTime(remaining);
+                if (remaining === 0) finishQuiz();
+            }
+
+            function startQuiz() {
+                form.reset();
+                for (const control of form.elements) {
+                    control.disabled = false;
+                }
+                results.hidden = true;
+                summary.textContent = "";
+                questionResults.replaceChildren();
+                submitted = false;
+
+                // Use a deadline so the timer stays accurate if the tab is inactive.
+                deadline = Date.now() + timeLimit * 1000;
+                updateTimer();
+                timerId = setInterval(updateTimer, 250);
+            }
+
+            form.addEventListener("submit", event => {
+                event.preventDefault();
+                finishQuiz();
+            });
+
+            retake.addEventListener("click", () => {
+                startQuiz();
+                document.getElementById("q1").focus();
+            });
+
+            startQuiz();
+        </script>
+    </main>
+
+    <footer>
+        <p>
+            This website is a class project for
+            <a href="https://ksuweb.github.io/IT3203/">IT 3203: Web and Internet</a>
+            at Kennesaw State University.
+        </p>
+    </footer>
+</body>
+</html>
