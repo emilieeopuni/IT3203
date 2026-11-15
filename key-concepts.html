@@ -25,7 +25,7 @@
     <main id="main-content">
     <!-- Seven Key DNS concepts -->
         <section>
-            <h2>Seven Key Concepts</h2>
+            <h2>Ten Key Concepts</h2>
             <dl>
                 <dt>Domain Name</dt>
                 <dd>
@@ -69,6 +69,27 @@
                     Caching temporarily stores DNS answers for reuse.
                     TTL specifies how long a record may be cached
                     before it needs to be refreshed.
+                </dd>
+                
+                <dt>Negative DNS Caching</dt>
+                <dd>
+                    A resolver can temporarily cache a response saying
+                    that a domain name or the requested record type is
+                    missing. This avoids repeating the same lookup until
+                    the cached response expires.
+                </dd>
+
+                <dt>DNS Delegation</dt>
+                <dd>
+                    A parent DNS zone uses NS records to tell resolvers
+                    which name servers are responsible for a child zone.
+                </dd>
+
+                <dt>Reverse DNS Lookup</dt>
+                <dd>
+                    A reverse lookup starts with an IP address and asks
+                    for its associated hostname. DNS uses a PTR record
+                    to provide that name when one is configured.
                 </dd>
             </dl>
         </section>
