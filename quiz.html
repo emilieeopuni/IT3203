@@ -172,7 +172,7 @@
 
                     const item = document.createElement("li");
                     item.textContent = `${correct ? "Correct" : "Incorrect"} (${points}/1). Answer: ${question.answer}`;
-                    item.style.color = correct ? "var(--quiz-correct, #16803c)" : "var(--quiz-incorrect, #c43232)";
+                    item.className = correct ? "quiz-correct" : "quiz-incorrect";
                     questionResults.appendChild(item);
                 });
 
