@@ -235,3 +235,12 @@ footer a:focus-visible {
     opacity: 0.6;
     cursor: default;
 }
+
+/* Quiz result colors */
+#question-results .quiz-correct {
+    color: #16803c;
+}
+
+#question-results .quiz-incorrect {
+    color: #c43232;
+}
